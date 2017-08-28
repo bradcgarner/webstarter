@@ -1,0 +1,178 @@
+* {
+  margin: auto;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: #111; }
+
+body {
+  background-color: white; }
+
+header {
+  background-color: white; }
+
+.main {
+  width: 100%; }
+
+.col.inputOutput {
+  height: 100%; }
+
+header h1 {
+  font-size: 18px;
+  text-align: center; }
+
+.inputOutputHeader {
+  margin-bottom: 6px;
+  height: 1em; }
+  .inputOutputHeader h1 {
+    font-size: 16px;
+    display: inline-block;
+    float: left;
+    margin: 0; }
+
+.headerIcons,
+.inputOutputIcons {
+  display: inline-block;
+  float: right;
+  background-color: white; }
+
+textarea {
+  height: 80vh;
+  width: 100%;
+  font-family: 'Overpass Mono', monospace;
+  font-size: 11px;
+  padding: 0.5em;
+  -webkit-box-shadow: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.25); }
+  textarea.input {
+    background-color: #fff4bc; }
+    textarea.input ::-webkit-input-placeholder {
+      /* Chrome/Opera/Safari */
+      color: #333; }
+    textarea.input ::-moz-placeholder {
+      /* Firefox 19+ */
+      color: #333; }
+    textarea.input :-ms-input-placeholder {
+      /* IE 10+ */
+      color: #333; }
+    textarea.input :-moz-placeholder {
+      /* Firefox 18- */
+      color: #333; }
+  textarea.output {
+    background-color: #e5dcaa; }
+
+.run {
+  height: 1em;
+  background-color: white;
+  display: inline-block;
+  float: left; }
+
+.icon {
+  display: inline-block;
+  float: right;
+  height: 1em;
+  width: 1em;
+  background-color: white;
+  background-size: 100%;
+  margin-left: 4px;
+  border-radius: 3px; }
+  .icon:hover {
+    background-color: #eee; }
+
+.headerIcons .icon {
+  float: right; }
+
+.runIcons {
+  float: left; }
+
+.iconEmail {
+  background-image: url("./images/ios7-email-outline.png"); }
+
+.iconCodepen {
+  background-image: url("./images/codepen.svg"); }
+
+.iconCopy {
+  background-image: url("./images/ios7-copy-outline.png"); }
+
+.iconHelp {
+  background-image: url("./images/ios7-help-outline.png"); }
+
+.iconVideo {
+  background-image: url("./images/ios7-film-outline.png"); }
+
+.iconRun {
+  background-image: url("./images/arrow-right-a.png"); }
+
+.iconRerun {
+  background-image: url("./images/ios7-refresh-empty.png"); }
+
+.iconShrink {
+  background-image: url("./images/arrow-shrink.png"); }
+
+.iconExpand {
+  background-image: url("./images/arrow-expand.png"); }
+
+.icon {
+  position: relative;
+  display: inline-block;
+  background-repeat: no-repeat; }
+  .icon .tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    width: 1000%;
+    font-size: 85%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    color: white;
+    padding: 5px;
+    z-index: 2; }
+  .icon:hover > .tooltiptext {
+    visibility: visible; }
+
+.tooltiptext {
+  left: 100%;
+  right: auto;
+  border-radius: 0 15px 15px 15px; }
+
+.tooltiptext.left {
+  right: 100%;
+  left: auto;
+  border-radius: 15px 0 15px 15px; }
+
+.iframeContainer {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  -webkit-box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25); }
+
+iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 0; }
+
+.videoText {
+  margin-top: 20px; }
+  .videoText h2 {
+    font-size: 14px; }
+  .videoText ul {
+    margin-left: 2em; }
+  .videoText p, .videoText li {
+    font-size: 13px; }
+  .videoText p {
+    margin-top: 10px;
+    margin-bottom: 10px; }
+
+.hidden {
+  display: none; }
+
+/*# sourceMappingURL=main.css.map */

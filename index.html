@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Web Starter</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="images/ios7-bolt.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Overpass+Mono" rel="stylesheet">  
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="../styles/columns-float-grid.css">
+</head>
+
+<body>
+  <header>
+    <h1>Web Starter</h1>
+  </header>
+
+  <main>
+
+    <section class='row'>
+      <div class='col col-12'>
+        <div class='runIcons'>
+          Run
+          <div class='icon run iconRun'>
+            <div class='tooltiptext'>Convert input (outline) to starter HTML, starter CSS, starter jQuery selectors</div>
+          </div>
+          <div class='icon run iconRerun'>
+            <div class='tooltiptext'>Convert input (outline) to starter HTML, starter CSS, starter jQuery selectors. This will over-write your existing output!</div>              
+          </div>
+        </div><!--end runIcons-->
+        <div class='headerIcons'>
+            <div class='icon iconCodepen'>
+              <div class='tooltiptext'>Start a new Pen Codepen, using starter HTML, CSS, jQ</div>
+            </div>
+            <div class='icon iconEmail'>
+              <div class='tooltiptext'>Email input, HTML, CSS, jQ</div>                
+            </div>
+            <div class='icon iconHelp'>
+              <div class='tooltiptext'>Help!</div>                
+            </div>
+            <div class='icon iconVideo'>
+              <div class='tooltiptext'>Show introductory video</div>                
+            </div>
+        </div><!--end icon headerIcons-->
+      </div><!--end col-12'-->
+    </section><!--end row-->
+
+    <section class='row inputOutputRow'>
+
+      <article class='col col-3 input inputOutput inputHtml'>
+        <div class='inputOutputHeader'>
+          <h1>Input</h1>
+          <div class='inputOutputIcons'>
+            <div class='icon iconShrink inputOutputIcon hidden'>
+              <div class='tooltiptext'>Reduce (show all inputs/outputs)</div>                
+            </div>
+            <div class='icon iconExpand inputOutputIcon hidden'>
+              <div class='tooltiptext'>Enlarge input</div>                
+            </div>
+            <div class='icon iconEmail inputOutputIcon'>
+              <div class='tooltiptext'>Email input</div>
+            </div>
+            <div class='icon iconCopy inputOutputIcon'>
+              <div class='tooltiptext'>Copy input to clipboard</div>
+            </div>
+            <div class='icon iconHelp inputOutputIcon'>
+              <div class='tooltiptext'>Help!</div>                
+            </div>
+          </div><!--end inputOutputIcons-->
+        </div><!--end inputOutputHeader-->
+        <textarea name="userInputText" class="input inputUser" placeholder="enter outline of DOM"></textarea>
+      </article><!--end article input inputOutput htmlInput-->
+
+      <article class='col col-3 output inputOutput outputHtml'>
+        <div class='inputOutputHeader'>
+          <h1>HTML</h1>
+          <div class='inputOutputIcons'>
+            <div class='icon iconShrink inputOutputIcon hidden'>
+              <div class='tooltiptext'>Reduce (show all inputs/outputs)</div>                
+            </div>
+            <div class='icon iconExpand inputOutputIcon hidden'>
+              <div class='tooltiptext'>Enlarge HTML</div>                
+            </div>
+            <div class='icon iconEmail inputOutputIcon'>
+              <div class='tooltiptext'>Email starter HTML</div>      
+            </div>
+            <div class='icon iconCopy inputOutputIcon'>
+              <div class='tooltiptext'>Copy starter HTML to clipboard</div>                
+            </div>
+            <div class='icon iconHelp inputOutputIcon'>
+              <div class='tooltiptext'>Help!</div>                
+            </div>
+          </div><!--end inputOutputIcons-->
+        </div><!--end inputOutputHeader-->
+        <textarea name="outputHtml" class="output outputHtml"></textarea>
+      </article><!--end article input inputOutput htmlOutput-->
+
+      <article class='col col-3 output inputOutput outputCss'>
+        <div class='inputOutputHeader'>
+          <h1>CSS</h1>
+          <div class='inputOutputIcons'>
+            <div class='icon iconShrink inputOutputIcon hidden'>
+                <div class='tooltiptext'>Reduce (show all inputs/outputs)</div>                
+            </div>
+            <div class='icon iconExpand inputOutputIcon hidden'>
+                <div class='tooltiptext'>Enlarge CSS</div>                
+            </div>
+            <div class='icon iconEmail inputOutputIcon'>
+              <div class='tooltiptext'>Email starter CSS</div>
+            </div>
+            <div class='icon iconCopy inputOutputIcon'>
+                <div class='tooltiptext'>Copy starter CSS to clipboard</div>
+            </div>
+            <div class='icon iconHelp inputOutputIcon'>
+                <div class='tooltiptext'>Help!</div>                
+            </div>
+          </div><!--end inputOutputIcons-->
+        </div><!--end inputOutputHeader-->
+        <textarea name="outputCss" class="output outputCss"></textarea>
+      </article><!--end article input inputOutput cssOutput-->
+
+      <article class='col col-3 output inputOutput outputJq'>
+        <div class='inputOutputHeader'>
+          <h1>jQuery</h1>
+          <div class='inputOutputIcons'>
+            <div class='icon iconShrink inputOutputIcon'>
+                <div class='tooltiptext'>Reduce (show all inputs/outputs)</div>                
+            </div>
+            <div class='icon iconExpand inputOutputIcon'>
+                <div class='tooltiptext'>Enlarge jQuery</div>                
+            </div>
+            <div class='icon iconEmail inputOutputIcon'>
+                <div class='tooltiptext'>Email starter jQuery</div>      
+            </div>
+            <div class='icon iconCopy inputOutputIcon'>
+                <div class='tooltiptext'>Copy starter jQuery to clipboard</div>                
+            </div>
+            <div class='icon iconHelp inputOutputIcon'>
+              <div class='tooltiptext'>Help!</div>            
+            </div>
+          </div><!--end inputOutputIcons-->
+        </div><!--end inputOutputHeader-->
+        <textarea name="outputJq" class="output outputJq"></textarea>
+      </article><!--end article input inputOutput jQOutput-->
+
+      <article class='col col-9 inputOutput video'>
+          <div class='inputOutputHeader'>
+            <h1>Insert Short, Fun Video About Using This Widget</h1>
+            <div class='inputOutputIcons'>
+              <div class='icon iconShrink inputOutputIcon'>
+                  <div class='tooltiptext'>Reduce (show all inputs/outputs)</div>                
+              </div>
+            </div><!--end inputOutputIcons-->
+          </div><!--end inputOutputHeader-->
+          <div class='iframeContainer'>
+            <iframe src="https://www.youtube-nocookie.com/embed/oUknlSWNbEI?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+          </div>
+          <div class='videoText'>
+            <h2>Save Time Starting Web Pages</h2>
+            <p>In input, enter a list of elements and classes for your DOM. See example placeholder text in input.  Instead of writing out all the opening and closing tags, just list classes and non-div elements. List in order (you are structuring the DOM), and represent closing tags by starting lines with the word "end".</p>
+            <p>Benefits:</p>
+            <ul>
+              <li>Less time on rote tasks</li>
+              <li>More focus on semantic classes</li>
+              <li>Do this on any device, then transfer</li>
+              <li>Expedite accuracy of HTML/CSS/jQuery coordination</li>
+            </ul>
+          </div>
+              
+        </article><!--end article input inputOutput jQOutput-->
+
+    </section><!--end row-->
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="index.js"></script>
+
+</body>
+<!--end body-->

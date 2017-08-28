@@ -1,0 +1,251 @@
+$headerColor: white;
+$background: white;
+
+$font-size: 16px;
+$header-h1-font-size: 18px;
+$inputOutput-header-font-size: 16px;
+$video-header-font-size: 14px;
+$video-font-size: 13px;
+$textarea-font-size: 11px;
+
+$iconHeight: 1em; // so icons are always the same height as the text they are next to
+$iconWidth: 1em;  // so icons are square
+$iconColor: $background;
+$icon-margin-left: 4px; // spacing between icons; none on right since all float right
+$iconColor-hover: #eee;
+$iconBorderRadius: 3px;
+
+$inputOutput-header-bottom-margin: 6px;
+
+$inputOutputRow-ht: 85vh; // this is the main row with the 4 boxes
+$inputOutput-column-ht: 100%; // column is direct child of row; set to 100% height or 85vh
+$inputOutput-header-height: 2em;
+$textarea-ht: 80vh; // assuming the inputOutput-header-height is 5vh (2em ~~ 5vh??), then there is no overflow
+
+$inputBackground: #fff4bc;
+$outputBackground: #e5dcaa;
+$textarea-padding: 0.5em;
+$textarea-shadow: rgba(0,0,0,0.25);
+$inputPlaceholder: #333;
+
+$tooltip-background: rgba(0,0,0,0.5);
+$tooltip-border: 1px solid #333;
+$tooltip-text-color: white;
+$tooltip-z-index: 2;
+
+$single-column-width: 640px;
+
+* {
+  margin: auto;
+  padding: 0;
+  margin: 0;
+  font-size: $font-size;
+  font-family: 'Roboto', sans-serif;
+  color: #111;
+}
+body {
+  background-color: $background
+}
+// ~~~~~~~~~~~~~~~~ MAJOR SITE SECTIONS ~~~~~~~~~~~~~~~
+header {
+  background-color: $headerColor;
+}
+.main {
+  width: 100%;
+}
+.section {
+  &.inputOutput {}
+  &.input {}
+  &.output {}
+}
+.inputOutputHeader {
+  .inputOutputIcons {}
+}
+.col.inputOutput {
+  height: $inputOutput-column-ht;
+}
+// ~~~~~~~~~~~~~~~~ HEADERS ~~~~~~~~~~~~~~~~~~~~~~~
+header h1 {
+  font-size: $header-h1-font-size;
+  text-align: center;
+}
+.inputOutputHeader {
+  margin-bottom: $inputOutput-header-bottom-margin;
+  height: $iconHeight;
+  h1 {
+    font-size: $inputOutput-header-font-size;
+    display: inline-block;
+    float: left;
+    margin: 0; // needed to over-ride the normalizr
+  }
+}
+.headerIcons,
+.inputOutputIcons {
+  display: inline-block;
+  float: right;
+  background-color: $iconColor;
+}
+// ~~~~~~~~~~~~~~~~ TEXTAREAS ~~~~~~~~~~~~~~~~~~~~~~~
+
+textarea {
+  height: $textarea-ht;
+  width: 100%;
+  font-family: 'Overpass Mono', monospace;  
+  font-size: $textarea-font-size;
+  padding: $textarea-padding;
+  -webkit-box-shadow: inset 2px 2px 4px 0px $textarea-shadow;
+  -moz-box-shadow: inset 2px 2px 4px 0px $textarea-shadow;
+  box-shadow: inset 2px 2px 4px 0px $textarea-shadow;
+  &.input {
+    background-color: $inputBackground;
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: $inputPlaceholder;
+    }
+    ::-moz-placeholder { /* Firefox 19+ */
+      color: $inputPlaceholder;
+    }
+    :-ms-input-placeholder { /* IE 10+ */
+      color: $inputPlaceholder;
+    }
+    :-moz-placeholder { /* Firefox 18- */
+      color: $inputPlaceholder;
+    }
+  }
+  &.output { 
+    background-color: $outputBackground; 
+  }
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~ RUN BUTTON ~~~~~~~~~~~~~~~~~~~~
+// header > .row > .run
+.run {
+  height: $iconHeight;
+  background-color: $iconColor;
+  display: inline-block;
+  float: left;
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~ ICONS ~~~~~~~~~~~~~~~~~~~~~~
+.icon {
+  display: inline-block;
+  float: right;
+  height: $iconHeight;
+  width: $iconWidth;
+  background-color: $iconColor;
+  background-size: 100%;
+  margin-left: $icon-margin-left;
+  border-radius: $iconBorderRadius; // only visible on hover
+  &:hover {
+    background-color: $iconColor-hover;
+  }
+}
+// header > .row > .headerIcons (div) > .icon (multiple)
+.headerIcons .icon {
+  float: right;
+}
+.runIcons {
+  float: left;
+}
+
+.iconEmail { background-image: url("./images/ios7-email-outline.png"); }
+.iconCodepen { background-image: url("./images/codepen.svg"); }
+.iconCopy { background-image: url("./images/ios7-copy-outline.png"); }
+.iconHelp { background-image: url("./images/ios7-help-outline.png"); }
+.iconVideo { background-image: url("./images/ios7-film-outline.png"); }
+.iconRun { background-image: url("./images/arrow-right-a.png"); }
+.iconRerun { background-image: url("./images/ios7-refresh-empty.png"); }
+.iconShrink { background-image: url("./images/arrow-shrink.png"); }
+.iconExpand { background-image: url("./images/arrow-expand.png"); }
+
+// @media screen and (min-width: $single-column-width) {
+//   display: inline-block;
+// }
+
+.inputOutputIcon {
+  .iconEmail,
+  .iconCodepen,
+  .iconCopy {
+    // hide these when nothing is entered -- maybe add a hidden class
+  }
+
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~ TOOLTIPS ~~~~~~~~~~~~~~~~~~~~~~
+// in this case, tooltips are only applied to icons, so we just edit the icon class as our defacto tooltip container
+.icon {
+  position: relative;
+  display: inline-block;
+  background-repeat: no-repeat;
+  // Tooltip text
+  .tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    width: 1000%; //of the icon
+    font-size: 85%; //of normal
+    background-color: $tooltip-background;
+    border: $tooltip-border;
+    color: $tooltip-text-color;
+    padding: 5px;
+    z-index: $tooltip-z-index;
+  }
+  &:hover > .tooltiptext {
+    visibility: visible;
+  } 
+}
+
+.tooltiptext {
+  left: 100%;
+  right: auto;
+  border-radius: 0 15px 15px 15px;      
+}
+.tooltiptext.left {
+  right: 100%;
+  left: auto;
+  border-radius: 15px 0 15px 15px;  
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~ VIDEO ~~~~~~~~~~~~~~~~~~~~~~
+// https://avexdesigns.com/responsive-youtube-embed/
+// basically we are creating padding in the container, and the iframe itself sits on top of that padding
+.iframeContainer {
+  position: relative;
+  width: 100%; // of column
+  padding-bottom: 56.25%; // 315 / 560
+  height: 0;
+  overflow: hidden;
+  -webkit-box-shadow: 2px 2px 4px 0px darken($textarea-shadow, 15%);
+  -moz-box-shadow: 2px 2px 4px 0px darken($textarea-shadow, 15%);
+  box-shadow: 2px 2px 4px 0px darken($textarea-shadow, 15%);
+}
+
+iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; 
+  border: 0;
+}
+
+.videoText {
+  margin-top: 20px;
+  h2 {
+    font-size: $video-header-font-size;
+  }
+  ul {
+    margin-left: 2em;
+  }
+  p, li {
+    font-size: $video-font-size;
+  }
+  p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~ HIDDEN ~~~~~~~~~~~~~~~~~~~~~~
+.hidden {
+  display: none;
+}
