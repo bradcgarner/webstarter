@@ -1,4 +1,9 @@
 'use strict';
+/*$ global*/
+/* known bugs: headers get comments, everything ends as a div 
+ * elements showing up as classes when writing CSS
+ * spans are convereted to divs?
+ */
 
 const STORE = {
   htmlElements: {
@@ -132,31 +137,37 @@ const STORE = {
     wbr: { description: 'Defines a possible line-break', status: true }
   },
   nextIndent: 0,
-  oneIndent: ' ',
   singleColumnWidth: 640, // this must match the CSS responsive media query
   displayStatus: 'video', // options are video, 4colStart, 4colEdit, 1col, and 1field
   displayDevice: '',
   inputText: '',
-  theCss: ''
+  theCss: '' ,
+  oneIndent: '  ', // FUTURE OPTION: USER SELECTION
+  openStack: [],
+  firstToLower: true, // FUTURE OPTION: USER SELECTION
+  cssOption: 'images', // FUTURE OPTION: USER SELECTION
+  defaultCss: [
+  `  background-color: $aColor;`
+  ]
+
+  // defaultCss: [
+  //   `  position: absolute;
+  //   top: 10%;
+  //   left: 10%;
+  //   height: 10%;
+  //   width: 10%;
+  //   border-radius: 25%;
+  //   background-color: $aColor`
+  //   ]
 };
 
 // basically a regex for the line - don\'t obsess; assume this is a good programmer, just get rid of // and blank line
 function isAGoodLine(line) {
-  let result = true;
-  switch (true) {
-  case line.length <= 1:
-    result = false;
-    break;
-  default:
-    result = true;
-    break;
-  }
-  return result;
+  if ( line.length ) { return true;} else { return false;}
 }
 
 // check to see the indent level of the line, and add spaces to the front
 function addIndentToLine(qty) {
-  STORE.oneIndent = '  '; // FUTURE OPTION: USER SELECTION
   let indent = '';
   for (let i = 1; i <= qty; i++) {
     indent += STORE.oneIndent;
@@ -165,27 +176,25 @@ function addIndentToLine(qty) {
 }
 
 function cleanTheLine(line) {
-  // replace tabs with spaces
-  let tab = RegExp('\\t', 'g');
+  // we could do more cleanup, but assume this is good for now.
+  let tab = RegExp('\\t', 'g');   // replace tabs with spaces  
   let noTab = line.replace(tab, ' ');
-  // remove double spaces
-  let noQuad = noTab.replace('    ', ' ');
+  let noQuad = noTab.replace('    ', ' ');   // remove double spaces  
   let noTrip = noQuad.replace('   ', ' ');
   let noDouble = noTrip.replace('  ', ' ');
-  // remove leading & trailing white space
-  let noLead = noDouble.trim();
-  // change first letter to lowercase (undo phone auto-case)
-  let caseLine = noLead;
-  if (line.length > 0) { // FUTURE OPTION: ALLOW USER SELECTION
+  let noLead = noDouble.trim();   // remove leading & trailing white space  
+  let caseLine = noLead;   // change first letter to lowercase (undo phone auto-case)  
+  if (line.length && STORE.firstToLower) { // FUTURE OPTION: ALLOW USER SELECTION
     caseLine = noLead.charAt(0).toLowerCase() + noLead.slice(1);
+  } else {
+    caseLine = noLead;
   }
   return caseLine;
 }
 
 function checkElement(line) {
   let lineAsArr = line.split(' ');
-  // default element to div
-  let theElement = 'div';
+  let theElement = 'div';  // default element to div  
   // mutation 1: if the first word is 'end' and there are multiple words, remove the first word
   if (lineAsArr[0] === 'end' && lineAsArr.length > 1) { lineAsArr.shift(); } 
   // mutation 2: if the first word is an element, set the first word as the element.
@@ -195,10 +204,8 @@ function checkElement(line) {
 
 function checkClass(line, element) {
   let lineAsArr = line.split(' ');
-  // default class to entire line
-  let theClass = line;
-  // mutation 1: if the first word is 'end' and there are multiple words, remove the first word
-  if (lineAsArr.length === 1) {
+  let theClass = line;   // default class to entire line  
+  if (lineAsArr.length === 1) {   // mutation 1: if the first word is 'end' and there are multiple words, remove the first word  
     // do nothing; keep as default
   } else if (lineAsArr[0] === 'end') {
     lineAsArr.shift();
@@ -210,18 +217,16 @@ function checkClass(line, element) {
   } else if (lineAsArr[0] === element ) {
     lineAsArr.shift();
   }
-  // join the remaining words back into a string ()
-  theClass = lineAsArr.join(' ');
+  theClass = lineAsArr.join(' ');   // join the remaining words back into a string ()  
   return theClass;
 }
 
 // take a single line of input, and populate properties (start, end, indent level, actual html tag)
 function processTheLine(line) {
-  // indent = "next" indent passed in
   let lineObject = {};
-  // we could do more cleanup, but assume this is good for now.
   lineObject.line = cleanTheLine(line);
   lineObject.element = checkElement(lineObject.line);
+ 
   lineObject.class = checkClass(lineObject.line, lineObject.element);
   // if the first 3 characters are 'end', set type to end, else set type to start
   let arrFromLine = lineObject.line.split(' ');
@@ -230,18 +235,27 @@ function processTheLine(line) {
     lineObject.indent = STORE.nextIndent - 1; // next = next new tier; we are backing out
     STORE.nextIndent = lineObject.indent + 0; // subtract 1 since we just backed out a tier
     lineObject.indentPrint = addIndentToLine(lineObject.indent);
-    lineObject.tag = `${lineObject.indentPrint}</${lineObject.element}><!--${lineObject.line}-->
-`;
+
+    lineObject.elementCheck  = STORE.openStack.pop(lineObject);  // openStack lists all in order opened. They must close in same order
+    console.log('elementCheck was popped off',lineObject.elementCheck);
+    console.log( 'store after pop' ,STORE.openStack);  // openStack lists all in order opened. They must close in same order
+    lineObject.elementPrint = lineObject.elementCheck.element ? lineObject.elementCheck.element : lineObject.element ;  
+    lineObject.tag = `${lineObject.indentPrint}</${lineObject.elementPrint}><!--${lineObject.line}-->
+`; // ^^ hard-coded line returns inside backticks. Don't "fix" indents here.
   } else {
     lineObject.type = 'start';
     lineObject.indent = STORE.nextIndent + 0;
     STORE.nextIndent = lineObject.indent + 1; // add 1 for next tier
+    console.log('line object to push on',lineObject);
+    STORE.openStack = [...STORE.openStack, lineObject];
+    console.log( 'store after push' ,STORE.openStack);  // openStack lists all in order opened. They must close in same order
     lineObject.indentPrint = addIndentToLine(lineObject.indent);
     lineObject.tag = `${lineObject.indentPrint}<${lineObject.element}`;
     lineObject.tag += lineObject.class.length>0 ? ` class='${lineObject.class}'>
 ` : `>
-`;
+`; // ^^ hard-coded line returns inside backticks. Don't "fix" indents here.
   }
+  // console.log(lineObject,lineObject.indent, STORE.nextIndent);
   return lineObject;
 }
 
@@ -252,7 +266,10 @@ function createHtmlArrOfObj(text) {
   for (let i = 0; i < lines.length; i++) {
     if (isAGoodLine(lines[i])) {
       newObject = processTheLine(lines[i]);
+      
+   
       htmlArrOfObj.push(newObject);
+      
     }
   }
   return htmlArrOfObj;
@@ -296,13 +313,7 @@ function createCss(classArr, classObj) {
     if (tempClassObj.hasOwnProperty(classArr[i]) && classArr[i] !== 'end') {
       let cssItem =
         `.${classArr[i]} {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  height: 10%;
-  width: 10%;
-  border-radius: 25%;
-  background-color: $aColor
+${STORE.defaultCss[0]}
 }
 `;
       theCss += cssItem;
